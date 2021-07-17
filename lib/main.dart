@@ -60,27 +60,99 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              SizedBox(height: 25.0),
+              SizedBox(height: 15.0),
               Padding(
                 padding: const EdgeInsets.only(left: 25.0),
                 child: Text(
                   'Markisafe',
                   style: GoogleFonts.montserrat(
                     color: widget.headingColor,
-                    fontSize: 30.0,
+                    fontSize: 25.0,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
               SizedBox(height: 20.0),
-              ListView(),
-              SizedBox(height: 30.0),
-              Column(
-                children: <Widget>[ListView(), ListView()],
+
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: <Widget>[
+                    CategoriesCards(
+                      categoryImages: "nasi_goreng",
+                      categoryText: "Nasi Goreng",
+                    ),
+                    CategoriesCards(
+                      categoryImages: "mie",
+                      categoryText: "Mie/Kwetiau",
+                    ),
+                    CategoriesCards(
+                      categoryImages: "camilan",
+                      categoryText: "Camilan",
+                    ),
+                    CategoriesCards(
+                      categoryImages: "ayam",
+                      categoryText: "Ayam",
+                    ),
+                    CategoriesCards(
+                      categoryImages: "minuman",
+                      categoryText: "Minuman",
+                    ),
+                  ],
+                ),
               ),
+              // SizedBox(height: 30.0),
+              // Column(
+              //   children: <Widget>[ListView(), ListView()],
+              // ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CategoriesCards extends StatelessWidget {
+  final Color color = Color(0xfff9f9f9);
+  final categoryImages;
+  final categoryText;
+
+  CategoriesCards({this.categoryImages, this.categoryText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            padding: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: color,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Image.asset(
+              "assets/food_icons_lineal/$categoryImages.png",
+              color: color,
+              width: 40,
+              height: 40,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            categoryText,
+            style: GoogleFonts.montserrat(
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          )
+        ],
       ),
     );
   }
