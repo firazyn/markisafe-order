@@ -26,88 +26,91 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.primary,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: widget.primary,
+        leading: IconButton(
+          icon: Icon(Icons.menu_rounded),
+          color: widget.headingColor,
+          onPressed: () {},
+        ),
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.menu_rounded),
-                      color: widget.headingColor,
-                      onPressed: () {},
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.shopping_cart_outlined),
-                          color: widget.headingColor,
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.notifications_none_rounded),
-                          color: widget.headingColor,
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              IconButton(
+                icon: Icon(Icons.shopping_cart_outlined),
+                color: widget.headingColor,
+                onPressed: () {},
               ),
-              SizedBox(height: 15.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0),
-                child: Text(
-                  'Markisafe',
-                  style: GoogleFonts.montserrat(
-                    color: widget.headingColor,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+              IconButton(
+                icon: Icon(Icons.notifications_none_rounded),
+                color: widget.headingColor,
+                onPressed: () {},
               ),
-              SizedBox(height: 20.0),
-
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    CategoriesCards(
-                      categoryImages: "nasi_goreng",
-                      categoryText: "Nasi Goreng",
-                    ),
-                    CategoriesCards(
-                      categoryImages: "mie",
-                      categoryText: "Mie/Kwetiau",
-                    ),
-                    CategoriesCards(
-                      categoryImages: "camilan",
-                      categoryText: "Camilan",
-                    ),
-                    CategoriesCards(
-                      categoryImages: "ayam",
-                      categoryText: "Ayam",
-                    ),
-                    CategoriesCards(
-                      categoryImages: "minuman",
-                      categoryText: "Minuman",
-                    ),
-                  ],
-                ),
-              ),
-              // SizedBox(height: 30.0),
-              // Column(
-              //   children: <Widget>[ListView(), ListView()],
-              // ),
             ],
           ),
-        ),
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 20.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text(
+              'Markisafe',
+              style: GoogleFonts.montserrat(
+                color: widget.headingColor,
+                fontSize: 25.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SizedBox(height: 25.0),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: <Widget>[
+                CategoriesCards(
+                  categoryImages: "nasi_goreng",
+                  categoryText: "Nasi Goreng",
+                ),
+                CategoriesCards(
+                  categoryImages: "mie",
+                  categoryText: "Mie/Kwetiau",
+                ),
+                CategoriesCards(
+                  categoryImages: "ayam",
+                  categoryText: "Ayam",
+                ),
+                CategoriesCards(
+                  categoryImages: "camilan",
+                  categoryText: "Camilan",
+                ),
+                CategoriesCards(
+                  categoryImages: "minuman",
+                  categoryText: "Minuman",
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 30.0),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              children: <Widget>[
+                Text('hola'),
+                Text('hola'),
+                Text('hola'),
+                Text('hola'),
+                Text('hola'),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -123,7 +126,7 @@ class CategoriesCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: Column(
         children: [
           Container(
@@ -143,7 +146,7 @@ class CategoriesCards extends StatelessWidget {
               height: 40,
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 7),
           Text(
             categoryText,
             style: GoogleFonts.montserrat(
@@ -155,5 +158,13 @@ class CategoriesCards extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class FoodInfo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }
