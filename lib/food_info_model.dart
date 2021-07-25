@@ -13,6 +13,40 @@ class FoodData {
       this.foodVariant});
 }
 
+class CategoryList {
+  final categoryImages;
+  final categoryText;
+
+  CategoryList({this.categoryImages, this.categoryText});
+}
+
+var categoryList = [
+  CategoryList(
+    categoryImages: "semua",
+    categoryText: "Semua",
+  ),
+  CategoryList(
+    categoryImages: "nasi_goreng",
+    categoryText: "Nasi Goreng",
+  ),
+  CategoryList(
+    categoryImages: "mie",
+    categoryText: "Mie/Kwetiau",
+  ),
+  CategoryList(
+    categoryImages: "ayam",
+    categoryText: "Ayam",
+  ),
+  CategoryList(
+    categoryImages: "camilan",
+    categoryText: "Camilan",
+  ),
+  CategoryList(
+    categoryImages: "minuman",
+    categoryText: "Minuman",
+  ),
+];
+
 var foodDataList = [
   FoodData(
     foodImage: 'nasi_goreng',

@@ -189,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class CategoriesCards extends StatelessWidget {
+class CategoriesCards extends StatefulWidget {
   final Color primaryColor = Color(0xfff9f9f9);
   final Color secondaryColor = Color(0xffbeaee2);
   final categoryImages;
@@ -198,39 +198,56 @@ class CategoriesCards extends StatelessWidget {
   CategoriesCards({this.categoryImages, this.categoryText});
 
   @override
+  _CategoriesCardsState createState() => _CategoriesCardsState();
+}
+
+class _CategoriesCardsState extends State<CategoriesCards> {
+  String selectedCategory = "Semua";
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14.0),
-      child: Column(
-        children: [
-          Container(
-            width: 50,
-            height: 50,
-            padding: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: secondaryColor,
-              border: Border.all(
-                color: secondaryColor,
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selectedCategory = widget.categoryText;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+        child: Column(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              padding: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: widget.categoryText == selectedCategory
+                    ? widget.secondaryColor
+                    : widget.primaryColor,
+                border: Border.all(
+                  color: widget.secondaryColor,
+                ),
+                borderRadius: BorderRadius.circular(10),
               ),
-              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                "assets/food_icons_lineal/${widget.categoryImages}.png",
+                color: widget.categoryText == selectedCategory
+                    ? widget.primaryColor
+                    : widget.secondaryColor,
+                width: 40,
+                height: 40,
+              ),
             ),
-            child: Image.asset(
-              "assets/food_icons_lineal/$categoryImages.png",
-              color: primaryColor,
-              width: 40,
-              height: 40,
-            ),
-          ),
-          SizedBox(height: 7),
-          Text(
-            categoryText,
-            style: GoogleFonts.montserrat(
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-              color: secondaryColor,
-            ),
-          )
-        ],
+            SizedBox(height: 7),
+            Text(
+              widget.categoryText,
+              style: GoogleFonts.montserrat(
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+                color: widget.secondaryColor,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

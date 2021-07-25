@@ -120,7 +120,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                   QuantityBox(
                     primary: widget.primary,
                     headingColor: widget.headingColor,
-                    basePrice: widget.price.toInt(),
+                    // basePrice: widget.price.toInt(),
                   ),
                 ],
               ),
@@ -143,7 +143,7 @@ class _FoodDetailsState extends State<FoodDetails> {
               OrderButton(
                 primary: widget.primary,
                 headingColor: widget.headingColor,
-                price: widget.price,
+                // price: widget.price,
               ),
             ],
           ),
@@ -156,9 +156,9 @@ class _FoodDetailsState extends State<FoodDetails> {
 class QuantityBox extends StatefulWidget {
   final primary;
   final headingColor;
-  final basePrice;
+  // final basePrice;
 
-  QuantityBox({this.primary, this.headingColor, this.basePrice});
+  QuantityBox({this.primary, this.headingColor});
 
   @override
   _QuantityBoxState createState() => _QuantityBoxState();
@@ -168,7 +168,7 @@ class _QuantityBoxState extends State<QuantityBox> {
   int count = 0;
   @override
   Widget build(BuildContext context) {
-    double totalPrice = widget.basePrice;
+    // double totalPrice = widget.basePrice;
     return Container(
       padding: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
@@ -183,8 +183,8 @@ class _QuantityBoxState extends State<QuantityBox> {
                 () {
                   if (count != 0) {
                     count--;
-                    totalPrice = widget.basePrice - widget.basePrice;
-                    return OrderButton(price: totalPrice);
+                    // totalPrice = widget.basePrice - widget.basePrice;
+                    // return OrderButton(price: totalPrice);
                   }
                 },
               );
@@ -205,8 +205,8 @@ class _QuantityBoxState extends State<QuantityBox> {
             onTap: () {
               setState(() {
                 count++;
-                totalPrice = widget.basePrice + widget.basePrice;
-                return OrderButton(price: totalPrice);
+                // totalPrice = widget.basePrice + widget.basePrice;
+                // return OrderButton(price: totalPrice);
               });
             },
             child: Container(
@@ -291,9 +291,9 @@ class _VariantState extends State<Variant> {
 class OrderButton extends StatefulWidget {
   final primary;
   final headingColor;
-  final price;
+  // final price;
 
-  OrderButton({this.primary, this.headingColor, this.price});
+  OrderButton({this.primary, this.headingColor});
 
   @override
   _OrderButtonState createState() => _OrderButtonState();
@@ -313,7 +313,7 @@ class _OrderButtonState extends State<OrderButton> {
         ),
         child: Center(
           child: Text(
-            'Pesan - Rp${widget.price}',
+            'Pesan',
             style: GoogleFonts.montserrat(
               color: widget.primary,
               fontSize: 15,
