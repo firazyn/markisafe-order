@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mrksf/food_details.dart';
+import 'package:mrksf/food_info_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -117,44 +119,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   SizedBox(height: 10.0),
                   Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15.0,
-                      mainAxisSpacing: 25.0,
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 15.0,
+                        mainAxisSpacing: 25.0,
+                        crossAxisCount: 2,
+                        childAspectRatio: 1,
+                      ),
                       padding:
                           EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
-                      children: <Widget>[
-                        FoodInfo(
-                          foodImage: 'nasi_goreng',
-                          foodName: 'Nasi Goreng',
-                          foodPrice: '15.000',
-                        ),
-                        FoodInfo(
-                          foodImage: 'mie_goreng',
-                          foodName: 'Mie Goreng',
-                          foodPrice: '12.000',
-                        ),
-                        FoodInfo(
-                          foodImage: 'kwetiau_goreng',
-                          foodName: 'Kwetiau',
-                          foodPrice: '12.000',
-                        ),
-                        FoodInfo(
-                          foodImage: 'ayam_katsu',
-                          foodName: 'Ayam Katsu',
-                          foodPrice: '16.000',
-                        ),
-                        FoodInfo(
-                          foodImage: 'french_fries',
-                          foodName: 'French Fries',
-                          foodPrice: '8.000',
-                        ),
-                        FoodInfo(
-                          foodImage: 'jus_markisa',
-                          foodName: 'Jus Markisa',
-                          foodPrice: '5.000',
-                        ),
-                      ],
+                      itemCount: foodDataList.length,
+                      itemBuilder: (context, index) {
+                        final FoodData foods = foodDataList[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FoodDetails(
+                                    name: foods.foodName,
+                                    price: foods.foodPrice,
+                                    image: foods.foodImage,
+                                    desc: foods.foodDesc,
+                                    variants: foods.foodVariant,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: FoodInfo(
+                            foodImage: foods.foodImage,
+                            foodName: foods.foodName,
+                            foodPrice: foods.foodPrice,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -180,8 +180,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: 'Profil',
                   ),
                 ],
-                // currentIndex: _selectedIndex,
-                // onTap: _onItemTap,
               ),
             ),
           ],
@@ -264,12 +262,16 @@ class FoodInfo extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 flex: 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/food_images/$foodImage.png')),
-                    borderRadius: BorderRadius.circular(13.0),
+                child: Hero(
+                  tag: foodImage,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image:
+                              AssetImage('assets/food_images/$foodImage.png')),
+                      borderRadius: BorderRadius.circular(13.0),
+                    ),
                   ),
                 ),
               ),
@@ -282,16 +284,22 @@ class FoodInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(foodName,
-                            style: GoogleFonts.montserrat(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: primaryColor)),
-                        Text("Rp$foodPrice",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w400,
-                                color: primaryColor)),
+                        Text(
+                          foodName,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                            color: primaryColor,
+                          ),
+                        ),
+                        Text(
+                          "Rp$foodPrice",
+                          style: GoogleFonts.montserrat(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w300,
+                            color: primaryColor,
+                          ),
+                        ),
                       ],
                     ),
                     Container(
