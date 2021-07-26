@@ -78,22 +78,21 @@ var foodDataList = [
     foodName: 'Ayam Katsu',
     foodPrice: '16.000',
     foodDesc:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type.',
-    foodVariant: ['+Mayonaise', '+Saus Tiram', '+Saus Asam Manis'],
+        'Potongan daging ayam yang diolah menggunakan tepung roti dan disajikan dengan topping',
+    foodVariant: ['+Mayonaise', '+Saus Tiram', '+Asam Manis'],
   ),
   FoodData(
     foodImage: 'french_fries',
     foodName: 'French Fries',
     foodPrice: '8.000',
     foodDesc:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type.',
+        'Kentang lokal yang digoreng dan disajikan dengan saus tomat dan mayonaise',
   ),
   FoodData(
     foodImage: 'jus_markisa',
     foodName: 'Jus Markisa',
     foodPrice: '5.000',
-    foodDesc:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type.',
+    foodDesc: 'Dibuat dengan buah markisa segar, langsung dari pohonnya.',
     foodVariant: ['+Susu', '+Soda'],
   ),
 ];
