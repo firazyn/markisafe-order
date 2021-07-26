@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
 class FoodDetails extends StatefulWidget {
   final Color primary = Color(0xfff9f9f9);
-  final Color headingColor = Color(0xffbeaee2);
+  final Color headingColor = Color(0xff910bfe);
   final name;
   final image;
   final desc;
@@ -72,7 +72,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: widget.primary,
-                          width: 5.0,
+                          width: 3.5,
                         ),
                         shape: BoxShape.circle,
                         image: DecorationImage(
@@ -90,7 +90,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                 widget.name,
                 style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey,
+                  color: widget.headingColor,
                   fontSize: 24,
                 ),
               ),
@@ -112,9 +112,9 @@ class _FoodDetailsState extends State<FoodDetails> {
                   Text(
                     'Rp${widget.price.toString()}',
                     style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                       fontSize: 18,
-                      color: Colors.grey,
+                      color: widget.headingColor,
                     ),
                   ),
                   QuantityBox(
@@ -124,12 +124,12 @@ class _FoodDetailsState extends State<FoodDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 15.0),
+              SizedBox(height: 25.0),
               Text(
                 "Varian",
                 style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey,
+                  color: widget.headingColor,
                   fontSize: 20,
                 ),
               ),
@@ -139,7 +139,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                 headingColor: widget.headingColor,
                 variants: widget.variants,
               ),
-              SizedBox(height: 70.0),
+              SizedBox(height: 70),
               OrderButton(
                 primary: widget.primary,
                 headingColor: widget.headingColor,
@@ -242,49 +242,60 @@ class _VariantState extends State<Variant> {
   String selectedVariant;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 30,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.variants.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              setState(() {
-                selectedVariant = widget.variants[index];
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Container(
-                width: 90,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: widget.variants[index] == selectedVariant
-                      ? widget.headingColor
-                      : widget.primary,
-                  border: Border.all(
-                    color: widget.headingColor,
-                    width: 2.0,
+    if (widget.variants == null) {
+      return Text(
+        'Varian lain tidak tersedia',
+        style: GoogleFonts.montserrat(
+          color: Colors.grey,
+          fontSize: 15,
+        ),
+      );
+    } else {
+      return Container(
+        height: 30,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.variants.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                setState(() {
+                  selectedVariant = widget.variants[index];
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
+                  width: 90,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: widget.variants[index] == selectedVariant
+                        ? widget.headingColor
+                        : widget.primary,
+                    border: Border.all(
+                      color: widget.headingColor,
+                      width: 1.5,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Text(
-                    widget.variants[index],
-                    style: GoogleFonts.montserrat(
-                      color: widget.variants[index] == selectedVariant
-                          ? widget.primary
-                          : Colors.grey,
-                      fontSize: 12,
+                  child: Center(
+                    child: Text(
+                      widget.variants[index],
+                      style: GoogleFonts.montserrat(
+                        color: widget.variants[index] == selectedVariant
+                            ? widget.primary
+                            : widget.headingColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ),
+      );
+    }
   }
 }
 

@@ -5,12 +5,13 @@ class FoodData {
   final foodDesc;
   final foodVariant;
 
-  FoodData(
-      {this.foodImage,
-      this.foodName,
-      this.foodPrice,
-      this.foodDesc,
-      this.foodVariant});
+  FoodData({
+    this.foodImage,
+    this.foodName,
+    this.foodPrice,
+    this.foodDesc,
+    this.foodVariant,
+  });
 }
 
 class CategoryList {

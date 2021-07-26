@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   final Color primary = Color(0xfff9f9f9);
-  final Color headingColor = Color(0xffbeaee2);
+  final Color headingColor = Color(0xff910bfe);
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height - 120,
+              height: MediaQuery.of(context).size.height - 140,
               padding: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -85,37 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   SizedBox(height: 25.0),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        CategoriesCards(
-                          categoryImages: "semua",
-                          categoryText: "Semua",
-                        ),
-                        CategoriesCards(
-                          categoryImages: "nasi_goreng",
-                          categoryText: "Nasi Goreng",
-                        ),
-                        CategoriesCards(
-                          categoryImages: "mie",
-                          categoryText: "Mie/Kwetiau",
-                        ),
-                        CategoriesCards(
-                          categoryImages: "ayam",
-                          categoryText: "Ayam",
-                        ),
-                        CategoriesCards(
-                          categoryImages: "camilan",
-                          categoryText: "Camilan",
-                        ),
-                        CategoriesCards(
-                          categoryImages: "minuman",
-                          categoryText: "Minuman",
-                        ),
-                      ],
-                    ),
+                  CategoriesCards(
+                    primary: widget.primary,
+                    headingColor: widget.headingColor,
                   ),
                   SizedBox(height: 10.0),
                   Expanded(
@@ -163,17 +135,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Flexible(
               child: BottomNavigationBar(
                 backgroundColor: widget.headingColor,
-                selectedItemColor: Color(0xfff7dbf0),
+                selectedItemColor: Color(0xff97e0fb),
                 unselectedItemColor: widget.primary,
                 elevation: 0,
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.settings_applications_outlined),
-                    label: 'Pengaturan',
-                  ),
-                  BottomNavigationBarItem(
                     icon: Icon(Icons.home),
                     label: 'Beranda',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings_applications_outlined),
+                    label: 'Pengaturan',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.photo_rounded),
@@ -190,12 +162,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class CategoriesCards extends StatefulWidget {
-  final Color primaryColor = Color(0xfff9f9f9);
-  final Color secondaryColor = Color(0xffbeaee2);
-  final categoryImages;
-  final categoryText;
+  final Color primary;
+  final Color headingColor;
 
-  CategoriesCards({this.categoryImages, this.categoryText});
+  CategoriesCards({this.primary, this.headingColor});
 
   @override
   _CategoriesCardsState createState() => _CategoriesCardsState();
@@ -205,49 +175,61 @@ class _CategoriesCardsState extends State<CategoriesCards> {
   String selectedCategory = "Semua";
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          selectedCategory = widget.categoryText;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          children: [
-            Container(
-              width: 50,
-              height: 50,
-              padding: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: widget.categoryText == selectedCategory
-                    ? widget.secondaryColor
-                    : widget.primaryColor,
-                border: Border.all(
-                  color: widget.secondaryColor,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Image.asset(
-                "assets/food_icons_lineal/${widget.categoryImages}.png",
-                color: widget.categoryText == selectedCategory
-                    ? widget.primaryColor
-                    : widget.secondaryColor,
-                width: 40,
-                height: 40,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 70,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categoryList.length,
+        itemBuilder: (context, index) {
+          final CategoryList categories = categoryList[index];
+          return InkWell(
+            onTap: () {
+              setState(() {
+                selectedCategory = categories.categoryText;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: categories.categoryText == selectedCategory
+                          ? widget.headingColor
+                          : widget.primary,
+                      border: Border.all(
+                        color: widget.headingColor,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Image.asset(
+                      "assets/food_icons_lineal/${categories.categoryImages}.png",
+                      color: categories.categoryText == selectedCategory
+                          ? widget.primary
+                          : widget.headingColor,
+                      width: 40,
+                      height: 40,
+                    ),
+                  ),
+                  SizedBox(height: 7),
+                  Text(
+                    categories.categoryText,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: widget.headingColor,
+                    ),
+                  )
+                ],
               ),
             ),
-            SizedBox(height: 7),
-            Text(
-              widget.categoryText,
-              style: GoogleFonts.montserrat(
-                fontSize: 11,
-                fontWeight: FontWeight.w500,
-                color: widget.secondaryColor,
-              ),
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -255,7 +237,7 @@ class _CategoriesCardsState extends State<CategoriesCards> {
 
 class FoodInfo extends StatelessWidget {
   final Color primaryColor = Color(0xfff9f9f9);
-  final Color secondaryColor = Color(0xffbeaee2);
+  final Color secondaryColor = Color(0xff910bfe);
 
   final foodImage;
   final foodName;
@@ -313,7 +295,7 @@ class FoodInfo extends StatelessWidget {
                           "Rp$foodPrice",
                           style: GoogleFonts.montserrat(
                             fontSize: 11,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w400,
                             color: primaryColor,
                           ),
                         ),
